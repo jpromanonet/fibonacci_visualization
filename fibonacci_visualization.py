@@ -58,12 +58,49 @@ def fibonacci_in_digital_design(n):
     ax.set_ylabel("Fibonacci Number")
     st.pyplot(fig)
 
+# Function for Interactive Fibonacci Sequence Explorer
+def interactive_fibonacci_explorer():
+    st.sidebar.markdown("# Interactive Fibonacci Sequence Explorer")
+
+    # Sidebar options
+    n_terms_explorer = st.sidebar.slider("Number of Fibonacci Terms", min_value=2, max_value=50, value=10)
+    show_values = st.sidebar.checkbox("Show Fibonacci Values", value=True)
+
+    # Generate Fibonacci sequence
+    fib_sequence = generate_fibonacci(n_terms_explorer)
+
+    # Plot the interactive Fibonacci sequence explorer
+    fig, ax = plt.subplots()
+    ax.plot(fib_sequence, marker='o', linestyle='-', markersize=5, color='purple')
+    
+    if show_values:
+        for i, fib_value in enumerate(fib_sequence):
+            ax.text(i, fib_value, str(fib_value), ha='center', va='bottom', fontsize=8, color='black')
+
+    ax.set_xlabel("Term Index")
+    ax.set_ylabel("Fibonacci Number")
+    st.pyplot(fig)
+
+# Function for Golden Ratio Unveiled: Fibonacci Patterns in Art
+def fibonacci_patterns_in_art(n):
+    fib_sequence = generate_fibonacci(n)
+    
+    # Generate a plot to unveil Fibonacci patterns related to the Golden Ratio
+    fig, ax = plt.subplots()
+    ax.plot(fib_sequence[:-1], fib_sequence[1:], marker='o', linestyle='-', markersize=5, color='gold')
+    ax.set_xlabel("Fibonacci Number (n)")
+    ax.set_ylabel("Fibonacci Number (n+1)")
+    st.pyplot(fig)
+
 # Streamlit app
 def main():
     st.title("Fibonacci Visualizations")
 
     # Sidebar options
-    visualization_option = st.sidebar.selectbox("Select Visualization", ["Dynamic Fibonacci Spiral", "Dynamic Fibonacci Rectangles", "Nature's Numeric Harmony: Fibonacci in Flora", "Fibonacci in Digital Design: A Visual Exploration"])
+    visualization_option = st.sidebar.selectbox(
+        "Select Visualization",
+        ["Dynamic Fibonacci Spiral", "Dynamic Fibonacci Rectangles", "Nature's Numeric Harmony: Fibonacci in Flora", "Fibonacci in Digital Design: A Visual Exploration", "Interactive Fibonacci Sequence Explorer", "Golden Ratio Unveiled: Fibonacci Patterns in Art"]
+    )
 
     if visualization_option == "Dynamic Fibonacci Spiral":
         n_terms_spiral = st.sidebar.slider("Number of Fibonacci Terms", min_value=2, max_value=50, value=10)
@@ -95,6 +132,13 @@ def main():
     elif visualization_option == "Fibonacci in Digital Design: A Visual Exploration":
         n_terms_design = st.sidebar.slider("Number of Fibonacci Terms", min_value=2, max_value=20, value=5)
         fibonacci_in_digital_design(n_terms_design)
+
+    elif visualization_option == "Interactive Fibonacci Sequence Explorer":
+        interactive_fibonacci_explorer()
+
+    elif visualization_option == "Golden Ratio Unveiled: Fibonacci Patterns in Art":
+        n_terms_art = st.sidebar.slider("Number of Fibonacci Terms", min_value=2, max_value=20, value=5)
+        fibonacci_patterns_in_art(n_terms_art)
 
 # Run the app
 if __name__ == "__main__":
