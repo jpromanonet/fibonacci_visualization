@@ -120,6 +120,18 @@ def fibonacci_in_building_design(n, a, b):
     ax.set_ylabel("Y-axis")
     st.pyplot(fig)
 
+# Function for Data Visualization: Fibonacci Trends Over Time
+def fibonacci_trends_over_time(n):
+    # Generate Fibonacci numbers over time
+    fib_sequence = generate_fibonacci(n)
+
+    # Plot Fibonacci trends over time
+    fig, ax = plt.subplots()
+    ax.plot(range(1, n+1), fib_sequence, marker='o', linestyle='-', markersize=5, color='purple')
+    ax.set_xlabel("Time")
+    ax.set_ylabel("Fibonacci Number")
+    st.pyplot(fig)
+
 # Streamlit app
 def main():
     st.title("Fibonacci Visualizations")
@@ -127,7 +139,7 @@ def main():
     # Sidebar options
     visualization_option = st.sidebar.selectbox(
         "Select Visualization",
-        ["Dynamic Fibonacci Spiral", "Dynamic Fibonacci Rectangles", "Nature's Numeric Harmony: Fibonacci in Flora", "Fibonacci in Digital Design: A Visual Exploration", "Interactive Fibonacci Sequence Explorer", "Golden Ratio Unveiled: Fibonacci Patterns in Art", "Mathematical Beauty: Visualizing Infinite Fibonacci", "Architectural Symmetry: Fibonacci in Building Design"]
+        ["Dynamic Fibonacci Spiral", "Dynamic Fibonacci Rectangles", "Nature's Numeric Harmony: Fibonacci in Flora", "Fibonacci in Digital Design: A Visual Exploration", "Interactive Fibonacci Sequence Explorer", "Golden Ratio Unveiled: Fibonacci Patterns in Art", "Mathematical Beauty: Visualizing Infinite Fibonacci", "Architectural Symmetry: Fibonacci in Building Design", "Data Visualization: Fibonacci Trends Over Time"]
     )
 
     if visualization_option == "Dynamic Fibonacci Spiral":
@@ -177,6 +189,10 @@ def main():
         a_value = st.sidebar.slider("Value of 'a'", min_value=0.1, max_value=2.0, value=1.0)
         b_value = st.sidebar.slider("Value of 'b'", min_value=0.1, max_value=2.0, value=1.0)
         fibonacci_in_building_design(n_terms_building, a_value, b_value)
+
+    elif visualization_option == "Data Visualization: Fibonacci Trends Over Time":
+        n_terms_trends = st.sidebar.slider("Number of Fibonacci Terms", min_value=2, max_value=100, value=10)
+        fibonacci_trends_over_time(n_terms_trends)
 
 # Run the app
 if __name__ == "__main__":
