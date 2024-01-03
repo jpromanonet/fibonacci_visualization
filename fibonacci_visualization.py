@@ -132,6 +132,22 @@ def fibonacci_trends_over_time(n):
     ax.set_ylabel("Fibonacci Number")
     st.pyplot(fig)
 
+# Function for Fibonacci and Fractals: Exploring Infinite Complexity
+def fibonacci_and_fractals(n, iterations):
+    # Generate Fibonacci numbers
+    fib_sequence = generate_fibonacci(n)
+
+    # Create a fractal using Fibonacci numbers
+    fig, ax = plt.subplots()
+    x = np.linspace(-2, 2, 800)
+    y = np.linspace(-2, 2, 800)
+    X, Y = np.meshgrid(x, y)
+    Z = np.sin(X + fib_sequence[-1]) + np.cos(Y + fib_sequence[-2])
+    fractal = ax.contourf(X, Y, Z, cmap='viridis', levels=iterations)
+    fig.colorbar(fractal, ax=ax)
+    ax.set_title("Fibonacci and Fractals")
+    st.pyplot(fig)
+
 # Streamlit app
 def main():
     st.title("Fibonacci Visualizations")
@@ -139,7 +155,7 @@ def main():
     # Sidebar options
     visualization_option = st.sidebar.selectbox(
         "Select Visualization",
-        ["Dynamic Fibonacci Spiral", "Dynamic Fibonacci Rectangles", "Nature's Numeric Harmony: Fibonacci in Flora", "Fibonacci in Digital Design: A Visual Exploration", "Interactive Fibonacci Sequence Explorer", "Golden Ratio Unveiled: Fibonacci Patterns in Art", "Mathematical Beauty: Visualizing Infinite Fibonacci", "Architectural Symmetry: Fibonacci in Building Design", "Data Visualization: Fibonacci Trends Over Time"]
+        ["Dynamic Fibonacci Spiral", "Dynamic Fibonacci Rectangles", "Nature's Numeric Harmony: Fibonacci in Flora", "Fibonacci in Digital Design: A Visual Exploration", "Interactive Fibonacci Sequence Explorer", "Golden Ratio Unveiled: Fibonacci Patterns in Art", "Mathematical Beauty: Visualizing Infinite Fibonacci", "Architectural Symmetry: Fibonacci in Building Design", "Data Visualization: Fibonacci Trends Over Time", "Fibonacci and Fractals: Exploring Infinite Complexity"]
     )
 
     if visualization_option == "Dynamic Fibonacci Spiral":
@@ -193,6 +209,11 @@ def main():
     elif visualization_option == "Data Visualization: Fibonacci Trends Over Time":
         n_terms_trends = st.sidebar.slider("Number of Fibonacci Terms", min_value=2, max_value=100, value=10)
         fibonacci_trends_over_time(n_terms_trends)
+
+    elif visualization_option == "Fibonacci and Fractals: Exploring Infinite Complexity":
+        n_fractals = st.sidebar.slider("Number of Fibonacci Terms", min_value=2, max_value=100, value=10)
+        iterations = st.sidebar.slider("Number of Iterations", min_value=10, max_value=100, value=50)
+        fibonacci_and_fractals(n_fractals, iterations)
 
 # Run the app
 if __name__ == "__main__":
