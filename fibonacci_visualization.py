@@ -92,6 +92,34 @@ def fibonacci_patterns_in_art(n):
     ax.set_ylabel("Fibonacci Number (n+1)")
     st.pyplot(fig)
 
+# Function for Mathematical Beauty: Visualizing Infinite Fibonacci
+def visualize_infinite_fibonacci(n):
+    # Generate an infinite Fibonacci sequence
+    fib_sequence = generate_fibonacci(n)
+
+    # Plot the infinite Fibonacci sequence
+    fig, ax = plt.subplots()
+    ax.plot(fib_sequence, marker='o', linestyle='-', markersize=5, color='blue')
+    ax.set_xlabel("Term Index")
+    ax.set_ylabel("Fibonacci Number")
+    st.pyplot(fig)
+
+# Function for Architectural Symmetry: Fibonacci in Building Design
+def fibonacci_in_building_design(n, a, b):
+    # Generate a hyperbolic curve based on Fibonacci numbers
+    fib_sequence = generate_fibonacci(n)
+
+    # Create a hyperbolic curve using Fibonacci numbers
+    x = np.linspace(-np.pi, np.pi, n)
+    y = a * np.sinh(b * x)
+
+    # Plot the hyperbolic curve
+    fig, ax = plt.subplots()
+    ax.plot(x, y, color='red')
+    ax.set_xlabel("X-axis")
+    ax.set_ylabel("Y-axis")
+    st.pyplot(fig)
+
 # Streamlit app
 def main():
     st.title("Fibonacci Visualizations")
@@ -99,7 +127,7 @@ def main():
     # Sidebar options
     visualization_option = st.sidebar.selectbox(
         "Select Visualization",
-        ["Dynamic Fibonacci Spiral", "Dynamic Fibonacci Rectangles", "Nature's Numeric Harmony: Fibonacci in Flora", "Fibonacci in Digital Design: A Visual Exploration", "Interactive Fibonacci Sequence Explorer", "Golden Ratio Unveiled: Fibonacci Patterns in Art"]
+        ["Dynamic Fibonacci Spiral", "Dynamic Fibonacci Rectangles", "Nature's Numeric Harmony: Fibonacci in Flora", "Fibonacci in Digital Design: A Visual Exploration", "Interactive Fibonacci Sequence Explorer", "Golden Ratio Unveiled: Fibonacci Patterns in Art", "Mathematical Beauty: Visualizing Infinite Fibonacci", "Architectural Symmetry: Fibonacci in Building Design"]
     )
 
     if visualization_option == "Dynamic Fibonacci Spiral":
@@ -139,6 +167,16 @@ def main():
     elif visualization_option == "Golden Ratio Unveiled: Fibonacci Patterns in Art":
         n_terms_art = st.sidebar.slider("Number of Fibonacci Terms", min_value=2, max_value=20, value=5)
         fibonacci_patterns_in_art(n_terms_art)
+
+    elif visualization_option == "Mathematical Beauty: Visualizing Infinite Fibonacci":
+        n_terms_infinite = st.sidebar.slider("Number of Fibonacci Terms", min_value=2, max_value=1000, value=100)
+        visualize_infinite_fibonacci(n_terms_infinite)
+
+    elif visualization_option == "Architectural Symmetry: Fibonacci in Building Design":
+        n_terms_building = st.sidebar.slider("Number of Fibonacci Terms", min_value=2, max_value=100, value=10)
+        a_value = st.sidebar.slider("Value of 'a'", min_value=0.1, max_value=2.0, value=1.0)
+        b_value = st.sidebar.slider("Value of 'b'", min_value=0.1, max_value=2.0, value=1.0)
+        fibonacci_in_building_design(n_terms_building, a_value, b_value)
 
 # Run the app
 if __name__ == "__main__":
